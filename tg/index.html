@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090d18" />
+  <title>Переадресация Telegram</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="telegram-page">
+  <main class="telegram-wrap">
+    <section class="telegram-card" aria-live="polite">
+      <div class="telegram-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 4.5 17.8 19c-.24 1.03-.84 1.28-1.7.8l-4.7-3.47-2.27 2.18c-.25.25-.46.46-.94.46l.34-4.8 8.74-7.9c.38-.34-.08-.53-.59-.19L5.88 13.02l-4.62-1.45c-1-.31-1.02-1 .21-1.48L19.54 3.3c.85-.31 1.6.2 1.46 1.2Z" fill="currentColor" />
+        </svg>
+      </div>
+
+      <div class="eyebrow telegram-eyebrow">
+        <span class="status-dot" aria-hidden="true"></span>
+        БЫСТРЫЙ ПЕРЕХОД
+      </div>
+
+      <h1>Открыть в <span class="gradient-text">Telegram</span></h1>
+      <p class="telegram-subtitle" id="subtitle">Подготовка ссылки...</p>
+
+      <div class="telegram-actions" id="actions" hidden>
+        <a id="telegramLink" class="button button-primary telegram-action" href="#" rel="noopener">
+          Открыть в Telegram
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a id="webLink" class="button button-ghost telegram-action" href="#" target="_blank" rel="noopener noreferrer">
+          Открыть в Web Telegram
+        </a>
+      </div>
+
+      <div class="telegram-error" id="errorBox" role="alert" hidden></div>
+      <p class="telegram-hint" id="hint"></p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+
+      const rawDomain = (params.get('domain') ?? '').trim();
+      const rawStart = (params.get('start') ?? '').trim();
+
+      const domainOk = /^[A-Za-z][A-Za-z0-9_]{2,32}$/.test(rawDomain);
+      const startOk = rawStart === '' || /^[A-Za-z0-9_-]{1,64}$/.test(rawStart);
+
+      const actions = document.getElementById('actions');
+      const telegramLink = document.getElementById('telegramLink');
+      const webLink = document.getElementById('webLink');
+      const subtitle = document.getElementById('subtitle');
+      const errorBox = document.getElementById('errorBox');
+      const hint = document.getElementById('hint');
+
+      document.title = 'Переадресация Telegram';
+
+      if (!domainOk) {
+        subtitle.textContent = 'Не удалось подготовить ссылку.';
+        errorBox.hidden = false;
+        errorBox.textContent = 'На странице отсутствует обязательный параметр domain или его значение некорректно. Добавьте корректный username Telegram в адрес страницы.';
+        hint.textContent = 'Пример: ?domain=username&start=abcd';
+        return;
+      }
+
+      const domain = rawDomain;
+      const start = startOk ? rawStart : '';
+
+      const tgUrl = `tg://resolve?domain=${encodeURIComponent(domain)}${start ? `&start=${encodeURIComponent(start)}` : ''}`;
+      const webTgUrl = `https://web.telegram.org/#/im?tgaddr=${encodeURIComponent(tgUrl)}`;
+
+      subtitle.textContent = 'Вы будете перенаправлены к ';
+      const span = document.createElement('span');
+      span.className = 'telegram-domain';
+      span.textContent = `@${domain}`;
+      subtitle.append(span);
+
+      telegramLink.href = tgUrl;
+      telegramLink.innerHTML = `Открыть @${domain} в Telegram`;
+      telegramLink.setAttribute('aria-label', `Открыть @${domain} в Telegram`);
+
+      webLink.href = webTgUrl;
+      webLink.textContent = 'Открыть в Web Telegram';
+
+      hint.textContent = 'Если приложение не открылось автоматически, воспользуйтесь кнопкой Web Telegram.';
+      actions.hidden = false;
+
+      // Автоматически открываем Telegram, сохраняя кнопки в качестве запасного варианта.
+      window.location.href = tgUrl;
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перенаправление...</title>
+</head>
+
+<body>
+    <script>
+        const redirects = {
+            "/hype": "/tg/?domain=Marketings_SMM_bot&start=site-hype",
+            "/vcreaction": "/tg/?domain=V_TOP_soc_bot&start=site-vcreaction",
+            "/SMMBlogerTOP": "/tg/?domain=SMM_Bloger_TOP_bot&start=site-vcSMMBlogerTOP",
+            "/MarketingsSMM": "/tg/?domain=SMM_Bloger_TOP_bot&start=site-smmblogersite",
+            "/vcalex": "/tg/?domain=Alex_SMMkruti_bot&start=site-vcalex",
+            "/82cy": "/tg/?domain=SMM_Bloger_TOP_bot&start=site-smmblogersite",
+            "/vll1": "/tg/?domain=SMM_Bloger_TOP_bot&start=site-smmblogersite",
+            "/m379": "/tg/?domain=SpyIG&start=569CE832",
+            "/alex15": "/tg/?domain=SMM_Bloger_TOP_bot&start=site-smmblogersite",
+            "/nom1r": "/tg/?domain=Smm_bloger_bot&start=site-nomer1",
+            "/gobot": "/tg/?domain=Smm_bloger_bot&start=site-ssb",
+            "/8sf9": "/tg/?domain=SpyIG&start=569CE832",
+            "/lerAnd": "/tg/?domain=Lera_SMMboost_bot&start=site-and",
+            "/instrument-spyig": "/tg/?domain=SpyIG&start=569CE832",
+            "/polzovatelskoe-soglashenie": "/privacy",
+            "/oferta": "/offer"
+        };
+
+        let path = window.location.pathname;
+        path = path.replace(/\/+$/, "") || "/";
+
+        const destination = redirects[path] || "/";
+        window.location.replace(destination);
+    </script>
+</body>
+</html>
