@@ -516,6 +516,7 @@ h1{font-size:clamp(38px,5vw,61px);line-height:1.13;letter-spacing:-.055em;margin
   background: #927dff;
 }
 
+/* таблица с прайсом */
 @media (max-width: 640px) {
   .price-disclosure {
     border-radius: 14px;
@@ -564,4 +565,25 @@ h1{font-size:clamp(38px,5vw,61px);line-height:1.13;letter-spacing:-.055em;margin
   .price-table td {
     padding: 11px;
   }
+}
+
+/* Защита от горизонтального переполнения */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* Запасной вариант для старых браузеров */
+@supports not (overflow: clip) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Не даём декоративным элементам расширять страницу */
+.hero-visual {
+  min-width: 0;
+  overflow: hidden;
 }
