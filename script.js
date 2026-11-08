@@ -52,37 +52,3 @@
     revealItems.forEach((item) => item.classList.add('is-visible'));
   }
 })();
-window.addEventListener('load', () => {
-  const info = document.createElement('div');
-
-  info.style.cssText = `
-    position: fixed;
-    top: 100px;
-    right: 5px;
-    z-index: 999999;
-    background: red;
-    color: white;
-    padding: 12px;
-    font-size: 12px;
-    line-height: 1.6;
-    border-radius: 8px;
-  `;
-
-  const showInfo = () => {
-    info.innerHTML = `
-      Window: ${window.innerWidth}px<br>
-      HTML: ${document.documentElement.clientWidth}px<br>
-      HTML scroll: ${document.documentElement.scrollWidth}px<br>
-      Body: ${document.body.clientWidth}px<br>
-      Body scroll: ${document.body.scrollWidth}px<br>
-      Visual: ${window.visualViewport?.width}px<br>
-      Scale: ${window.visualViewport?.scale}
-    `;
-  };
-
-  document.body.appendChild(info);
-  showInfo();
-
-  window.visualViewport?.addEventListener('resize', showInfo);
-  window.addEventListener('resize', showInfo);
-});
