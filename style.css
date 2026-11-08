@@ -329,3 +329,239 @@ h1{font-size:clamp(38px,5vw,61px);line-height:1.13;letter-spacing:-.055em;margin
   .telegram-subtitle{font-size:14px;margin-bottom:24px}
   .telegram-action{min-height:51px;font-size:13.5px}
 }
+/* Price table — раскрывающийся прайс-лист */
+
+.price-disclosure {
+  margin-top: 28px;
+  border: 1px solid rgba(153, 132, 255, .2);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, .025);
+  overflow: hidden;
+}
+
+/* Кнопка раскрытия */
+
+.price-disclosure > summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 19px 22px;
+  cursor: pointer;
+  list-style: none;
+  color: #f3f5fc;
+  transition: background .2s;
+}
+
+.price-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.price-disclosure > summary:hover {
+  background: rgba(139, 115, 255, .08);
+}
+
+.price-disclosure > summary:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: -3px;
+}
+
+.price-disclosure__title {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.price-disclosure__meta {
+  margin-left: auto;
+  color: #929fb7;
+  font-size: 11px;
+}
+
+/* Иконка плюс / минус */
+
+.price-disclosure > summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: rgba(139, 115, 255, .15);
+  color: #b3a3ff;
+  font-size: 21px;
+  line-height: 1;
+}
+
+.price-disclosure[open] > summary::after {
+  content: "−";
+}
+
+/* Подсказка над таблицей */
+
+.price-table-note {
+  padding: 13px 18px;
+  border-top: 1px solid var(--line);
+  color: #8996ad;
+  font-size: 11px;
+  background: rgba(0, 0, 0, .12);
+}
+
+/* Контейнер с горизонтальной прокруткой */
+
+.price-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  border-top: 1px solid var(--line);
+}
+
+/* Сама таблица */
+
+.price-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: #cbd4e5;
+  font-size: 12px;
+}
+
+/* Заголовки */
+
+.price-table th {
+  padding: 15px 13px;
+  background: #19233a;
+  color: #c7bbff;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: left;
+  border-bottom: 1px solid rgba(174, 190, 225, .14);
+}
+
+/* Ячейки */
+
+.price-table td {
+  padding: 12px 13px;
+  border-bottom: 1px solid rgba(174, 190, 225, .09);
+  vertical-align: middle;
+  overflow-wrap: break-word;
+}
+
+/* Чередование фона строк */
+
+.price-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, .025);
+}
+
+.price-table tbody tr:hover {
+  background: rgba(139, 115, 255, .07);
+}
+
+/* Ширина столбцов */
+
+.price-table th:nth-child(1),
+.price-table td:nth-child(1) {
+  width: 14%;
+}
+
+.price-table th:nth-child(2),
+.price-table td:nth-child(2) {
+  width: 42%;
+}
+
+.price-table th:nth-child(3),
+.price-table td:nth-child(3) {
+  width: 17%;
+  text-align: center;
+}
+
+.price-table th:nth-child(4),
+.price-table td:nth-child(4) {
+  width: 13.5%;
+  text-align: center;
+}
+
+.price-table th:nth-child(5),
+.price-table td:nth-child(5) {
+  width: 13.5%;
+  text-align: center;
+}
+
+/* Числа не переносятся на новую строку */
+
+.price-table td:nth-child(n+3) {
+  white-space: nowrap;
+}
+
+/* Полоса прокрутки */
+
+.price-table-scroll::-webkit-scrollbar {
+  height: 7px;
+}
+
+.price-table-scroll::-webkit-scrollbar-track {
+  background: #101727;
+}
+
+.price-table-scroll::-webkit-scrollbar-thumb {
+  background: #6656aa;
+  border-radius: 10px;
+}
+
+.price-table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #927dff;
+}
+
+@media (max-width: 640px) {
+  .price-disclosure {
+    border-radius: 14px;
+  }
+
+  .price-disclosure > summary {
+    padding: 16px 17px;
+    padding-right: 55px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .price-disclosure__title {
+    font-size: 13px;
+  }
+
+  .price-disclosure__meta {
+    margin-left: 0;
+    font-size: 10px;
+  }
+
+  .price-disclosure > summary::after {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .price-table-note {
+    padding: 11px 14px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .price-table {
+    min-width: 760px;
+    font-size: 11px;
+  }
+
+  .price-table th {
+    padding: 13px 11px;
+    font-size: 10px;
+  }
+
+  .price-table td {
+    padding: 11px;
+  }
+}

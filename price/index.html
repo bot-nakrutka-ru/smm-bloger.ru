@@ -31,7 +31,22 @@
       <h1>Услуги и цены</h1>
       <p class="document-subtitle">НЕ ЯВЛЯЕТСЯ ПУБЛИЧНОЙ ОФЕРТОЙ</p>
       
-        <table border='1' cellspacing='0' cellpadding='5'>
+      <details class="price-disclosure" open>
+        <summary>
+          <span class="price-disclosure__title">Показать услуги и цены</span>
+          <span class="price-disclosure__meta">Скрыть / Открыть</span>
+        </summary>
+
+        <div class="price-table-note">
+          На телефоне таблицу можно прокручивать по горизонтали.
+        </div>
+
+        <div class="price-table-scroll"
+            role="region"
+            aria-label="Таблица услуг и цен"
+            tabindex="0">
+
+          <table class="price-table">
         <thead>
             <tr>
             <th>Соцсеть</th>
@@ -9284,7 +9299,8 @@
             </tr>
         </tbody>
         </table>
-
+      </div>
+    </details>
     </article>
   </main>
 </body>
